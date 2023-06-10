@@ -1,0 +1,36 @@
+
+--Create a nursing store database
+CREATE TABLE store (id integer primary key, name text, color text, sizes text, price integer, quantity integer);
+
+INSERT INTO store VALUES
+(1, "scrub tops", "blue red", "s m l", 25, 10),
+(2, "scub bottoms", "blue red", "s m l", 30, 10),
+(3, "pen lights", "white", "no", 15, 15),
+(4, "stethoscopes", "black gold", "no size", 65, 15),
+(5, "jackets", "blue red", "s m l", 40, 10),
+(6, "socks", "black white", "s m l", 20, 15),
+(7, "under shirt", "black white", "s m l", 20, 10),
+(8, "scissors", "patterns", "no size", 8, 20),
+(9, "tape", "white", "no size", 5, 20),
+(10, "pens", "black blue", "no size", 5, 30),
+(11, "headbands", "patterns", "one size", 10, 15),
+(12, "caps", "patterns", "s m l", 19, 20),
+(13, "silicone rings", "black white", "s m l", 7, 30),
+(14, "watches", "gold white", "s l", 45, 10),
+(15, "alcohol wipes", "no color", "no size", 10, 20);
+SELECT * FROM store ORDER BY price;
+
+--Display database ordered by price
+SELECT * FROM store
+ORDER BY price;
+
+ --What is the most expensive item sold?
+SELECT name, MAX(price) FROM store;
+
+What is the average price of the items sold in the store?
+SELECT AVG(price) FROM store;
+
+What are the three most expensive items?
+SELECT name, price FROM store
+ORDER BY price desc
+LIMIT 3;

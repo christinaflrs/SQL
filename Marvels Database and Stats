@@ -69,3 +69,12 @@ CASE
 FROM marvels
 GROUP BY overall_strength;
 
+-Determine relationships between popularity and overall strength:
+SELECT name, popularity,
+CASE
+    WHEN strength >4 THEN 'extra strong'
+    WHEN strength >2 THEN 'strong'
+    ELSE 'weak'
+    END AS 'overall_strength'
+FROM marvels
+ORDER BY popularity;

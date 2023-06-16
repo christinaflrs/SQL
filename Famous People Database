@@ -1,0 +1,67 @@
+--Create a table of celebrities and the jobs they are famous for:
+CREATE TABLE celebrities (id INTEGER PRIMARY KEY, name TEXT, job TEXT);
+INSERT INTO celebrities VALUES
+(1, 'Tim Mcgraw', 'singer');
+INSERT INTO celebrities VALUES (2, 'Faith Hill', 'singer');
+INSERT INTO celebrities VALUES (3, 'Taylor Swift', 'singer');
+INSERT INTO celebrities VALUES (4, 'Joe Alwyn', 'actor');
+INSERT INTO celebrities VALUES (5, 'Nina Dobrev', 'actor');
+INSERT INTO celebrities VALUES (6, 'Shaun White', 'athlete');
+INSERT INTO celebrities VALUES (7, 'Blake Lively', 'actor');
+INSERT INTO celebrities VALUES (8, 'Ryan Reynolds', 'actor');
+
+--Create a table with the same celebrities, giving each a celebrity id and their partner id:
+CREATE TABLE partners (id INTEGER PRIMARY KEY, partner1_id INTEGER, partner2_id INTEGER);
+INSERT INTO partners (partner1_id, partner2_id) VALUES (1, 2);
+INSERT INTO partners (partner1_id, partner2_id) VALUES (2, 1);
+INSERT INTO partners (partner1_id, partner2_id) VALUES (3, 4);
+INSERT INTO partners (partner1_id, partner2_id) VALUES (4, 3);
+INSERT INTO partners (partner1_id, partner2_id) VALUES (5, 6);
+INSERT INTO partners (partner1_id, partner2_id) VALUES (6, 5);
+INSERT INTO partners (partner1_id, partner2_id) VALUES (7, 8);
+INSERT INTO partners (partner1_id, partner2_id) VALUES (8, 7);
+
+--Create a table of those same celebrities and their reported net worth (in million USD):
+CREATE TABLE net_worth (id INTEGER PRIMARY KEY, name TEXT, net_worth INTEGER);
+INSERT INTO net_worth (name, net_worth) VALUES ('Tim McGraw', 200);
+INSERT INTO net_worth (name, net_worth) VALUES ('Faith Hill', 200);
+INSERT INTO net_worth (name, net_worth) VALUES ('Taylor Swift', 570);
+INSERT INTO net_worth (name, net_worth) VALUES ('Joe Alwyn', 4);
+INSERT INTO net_worth (name, net_worth) VALUES ('Nina Dobrev', 11);
+INSERT INTO net_worth (name, net_worth) VALUES ('Shaun White', 65);
+INSERT INTO net_worth (name, net_worth) VALUES ('Blake Lively', 30);
+INSERT INTO net_worth (name, net_worth) VALUES ('Ryan Reynolds', 350);
+
+--Use joins to... 
+
+---create a table with each celebrity's net woth, ordered from highest to lowest net worth:
+SELECT celebrities.name, celebrities.job, net_worth.net_worth 
+FROM celebrities
+JOIN net_worth
+ON celebrities.name = net_worth.name
+ORDER BY net_worth desc;
+
+---create a table with the names of each celebrity and their partner:
+SELECT a.name, b.name partner
+FROM partners
+JOIN celebrities a
+ON a.id = partners.partner1_id
+JOIN celebrities b
+ON b.id=partners.partner2_id
+ORDER BY a.name;
+
+---create a table with the names of each actor and their net worth:
+SELECT celebrities.name, celebrities.job, net_worth.net_worth
+FROM celebrities
+JOIN net_worth
+ON celebrities.name = net_worth.name
+WHERE celebrities.job = 'actor'
+ORDER BY net_worth desc;
+
+--create a table with the names of each singer and their net worth in order to compare net worths resulting from different jobs:
+SELECT celebrities.name, celebrities.job, net_worth.net_worth
+FROM celebrities
+JOIN net_worth
+ON celebrities.name = net_worth.name
+WHERE celebrities.job = 'singer'
+ORDER BY net_worth desc;

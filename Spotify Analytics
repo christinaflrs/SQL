@@ -1,0 +1,68 @@
+#For this project, I downloaded Spotify data from Kaggle.
+#Then I created a table to insert Spotify data into.
+#Finally, I performed analytics on the data using SQL. 
+
+#Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+#Then I inserted the Spotify Data .csv into the table.
+
+#Next, I explored the data using the following SQL. 
+
+#First, I found which artist had the most songs in the Spotify Top 50 in 2021
+SELECT artist_name, COUNT(artist_name) as numsongs
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY numsongs desc
+LIMIT 3
+
+#Then, I found who the top 10 artists based on popularity were.
+SELECT artist_name
+FROM BIT_DB.Spotifydata
+ORDER BY popularity desc
+LIMIT 10
+
+#Then, I found the songs ranked 40-50, based on energy.
+SELECT track_name
+FROM BIT_DB.Spotifydata
+ORDER BY energy asc
+LIMIT 10
+
+#Then, I found which song in a mojor key was the most popular based on popularity and the artist of that song.
+SELECT track_name, artist_name
+FROM BIT_DB.Spotifydata
+WHERE song_mode=1
+ORDER BY popularity
+LIMIT 1
+
+#Then, I found the loudest song, its tempo, and its popularity.
+SELECT track_name, tempo, popularity
+FROM BIT_DB.Spotifydata
+ORDER BY loudness desc
+LIMIT 1
+
+#Finally, I found the most positive and most negative songs.
+SELECT track_name, MAX(valence)
+FROM BIT_DB.Spotifydata
+
+SELECT track_name, MIN(valence)
+FROM BIT_DB.Spotifydata

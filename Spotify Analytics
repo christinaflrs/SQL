@@ -35,9 +35,10 @@ GROUP BY artist_name
 ORDER BY numsongs desc
 LIMIT 3
 
-#Then, I found who the top 10 artists based on popularity were.
-SELECT artist_name
+#Then, I found who the top 10 artists based on song popularity were.
+SELECT artist_name, avg(popularity)
 FROM BIT_DB.Spotifydata
+GROUP BY artist_name
 ORDER BY popularity desc
 LIMIT 10
 
@@ -60,9 +61,8 @@ FROM BIT_DB.Spotifydata
 ORDER BY loudness desc
 LIMIT 1
 
-#Finally, I found the most positive and most negative songs.
-SELECT track_name, MAX(valence)
-FROM BIT_DB.Spotifydata
-
-SELECT track_name, MIN(valence)
-FROM BIT_DB.Spotifydata
+#Finally, I found which songs had more energy than that of the song rated #1 by popularity and ordered them by energy.
+SELECT track_name, energy
+FROM Spotifydata
+WHERE energy > (SELECT energy FROM Spotifydata ORDER BY popularity desc LIMIT 1)
+ORDER BY energy desc

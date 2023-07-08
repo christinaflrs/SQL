@@ -1,6 +1,6 @@
-##For this SQL, I reviewed data in a Break Into Tech course database with multiple tables. I then queried the database to analyze the data.
+##For this SQL, I queried a Break Into Tech course database with multiple tables to review and analyze data.
 
-#1.	Show Customers (their full names, customer ID, and country) who are not in the US.
+#1. Show Customers (their full names, customer ID, and country) who are not in the US.
 SELECT FirstName, LastName, Customerid, Country
 FROM chinook.customers
 WHERE country <>'USA'

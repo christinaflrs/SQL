@@ -96,3 +96,11 @@ ON i.Customerid=c.Customerid
 WHERE e.Title='Sales Support Agent' AND i.InvoiceDate like '2009%'
 GROUP BY e.FirstName
 ORDER BY total desc LIMIT 1
+
+#15. What is the most common genre purchased?
+SELECT COUNT(t.Genreid) as 'purchases', g.Name as genre
+FROM tracks t
+JOIN genres g
+ON t.Genreid=g.Genreid
+GROUP BY g.Name
+ORDER BY purchases desc LIMIT 1

@@ -1,4 +1,4 @@
-#For this project, I downloaded Spotify data from Kaggle.
+ll#For this project, I downloaded Spotify data from Kaggle.
 #Then I created a table to insert Spotify data into.
 #Finally, I performed analytics on the data using SQL. 
 
@@ -35,7 +35,7 @@ GROUP BY artist_name
 ORDER BY numsongs desc
 LIMIT 3
 
-#Then, I found who the top 10 artists based on song popularity were.
+#Then, I found who the top 10 artists based on their average song popularity.
 SELECT artist_name, avg(popularity)
 FROM BIT_DB.Spotifydata
 GROUP BY artist_name
